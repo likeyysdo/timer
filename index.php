@@ -16,7 +16,7 @@
 
 <body>
   
-  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+<!-- <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cloud"></i><b>  Brand</b></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -34,17 +34,18 @@
       </div>
     </div>
   </nav>
+-->
   <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
           <h1 class="display-3 mb-4" id="title">Time is endless</h1>
           <h1 class="display-3 mb-4" id="titleMoney"><br></h1>
-          <h1 class="display-3 mb-4" id="titleTime"><script>
-document.write(moment().format('MMMM Do YYYY, h:mm:ss a'));
-</script></h1>
-          <p class="lead mb-5">Pingendo is a HTML editor for everyone. Easy for newbies, useful for professionals.
-            <br>Code quality is a must. Pingendo generates clean, battle-tested, modular Bootstrap 4 code. </p>
+          <h4 class="display-5 mb-4" id="titleTime"><script>
+document.write(moment().format('MMMM Do YYYY, H:mm:ss'));
+</script></h4>
+          <p class="lead mb-5" id="subTitle">
+            <br /><br /></p>
           <a href="#" class="btn btn-lg mx-1 btn-secondary" id="freebtn">Seek for free</a>
           <a href="#" class="btn btn-lg btn-primary mx-1" id="dosomebtn">Dance with shackles</a>
         </div>
@@ -88,7 +89,7 @@ document.write(moment().format('MMMM Do YYYY, h:mm:ss a'));
 function timeUpdate(){
   $("#titleMoney").text(count.toFixed(2));
   setInterval(function(){
-    $("#titleTime").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    $("#titleTime").text(moment().format('MMMM Do YYYY, H:mm:ss'));
 
     if (isStart == 1) {
     count = count + 0.9512*3*3;
@@ -115,6 +116,7 @@ function startRecord(){
     //alert(data);
     //count = Number(data);
     $("#titleMoney").text(count.toFixed(2));
+    $("#subTitle").html("Start:"+moment(lastRecord.date).format('MMMM Do YYYY, H:mm:ss')+'<br />'+"End:"+moment(lastRecord.date).add(45,'m').format('MMMM Do YYYY, H:mm:ss'));
     isStart = 1;
   });
    
@@ -132,7 +134,7 @@ function endRecord(){
 
 function getLastRecord(){
   //alert("getLastRecord");
-  //var record;
+  
   $.get(url,{action:"getLastRecord"},function(data,status){
 
   lastRecord = jQuery.parseJSON(data);
@@ -146,8 +148,7 @@ function getLastRecord(){
   }else{
   count = lastRecord.tempCount* 9.512;
   isStart = 0;
-  }
-  
+  } 
   });
 }
 $(document).ready(function(){
