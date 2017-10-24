@@ -14,21 +14,23 @@ switch ($action) {
 	case 'startRecord':
 		# code...
 	$lastRecord = $db->getLastRecord();
-	if ($lastRecord['type'] == 1) {
-		break;
+	if ($lastRecord['type'] == 0) {
+		$dvalue = strtotime(date("c"))-strtotime($lastRecord['date']);
+		$db->setTotalCount($db->getTotalCount()-$dvalue);
+		$db->startRecord(date("c"));
+
 	}
-	$db->startRecord(date("c"));
 		break;
 	case 'endRecord':
 		# code...
 	$lastRecord = $db->getLastRecord();
-	if ($lastRecord['type'] == 0) {
-		break;
-	}
+	if ($lastRecord['type'] == 1) {
 	$dvalue = strtotime(date("c"))-strtotime($lastRecord['date']);
 	$db->setTotalCount($db->getTotalCount()+$dvalue);
 	$db->endRecord(date("c"));
+	}
 	break;
+	
 	case 'getLastRecord':
 		# code...
 	$lastRecord = $db->getLastRecord();

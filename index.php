@@ -89,10 +89,11 @@ function timeUpdate(){
   $("#titleMoney").text(count.toFixed(2));
   setInterval(function(){
     $("#titleTime").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
-    if (isStart) {
+
+    if (isStart == 1) {
     count = count + 0.9512*3;
     $("#titleMoney").text(count.toFixed(2));
-  }else{
+  }else if (isStart == 0){
     count = count - 0.9512*3; 
     $("#titleMoney").text(count.toFixed(2));
   }
@@ -103,7 +104,7 @@ function getTotalCount(){
   
   $.get(url,{action:"getTotalCount"},function(data,status){
     //alert(data);
-    count = Number(data);
+    count = Number(data) * 9.512;
     $("#titleMoney").text(count.toFixed(2));
   });
   //return count;
@@ -136,33 +137,32 @@ function getLastRecord(){
 
   lastRecord = jQuery.parseJSON(data);
   if (lastRecord.type == "2") {
-    
       $("#titleMoney").text(lastRecord.count.toFixed(2));
       return 0;
     }
   if (lastRecord.type == "1") {
-    count = lastRecord.tempCount;
+    count = lastRecord.tempCount* 9.512;
     isStart = 1;
   }else{
-  count = lastRecord.tempCount;
+  count = lastRecord.tempCount* 9.512;
   isStart = 0;
   }
-  timeUpdate(count);  
+  
   });
 }
 $(document).ready(function(){
-  isStart = 0;
+  isStart = 2;
   lastRecord = {};
   count = 0;
-  url = "http://localhost:8000/1.php";
+  url = "/1.php";
   getLastRecord();
-  
+  timeUpdate();
 
   $("#freebtn").click(function(){
     endRecord();
-    $.get(url,{action:"getTotalCount"},function(data,status){
+    //$.get(url,{action:"getTotalCount"},function(data,status){
     //alert("数据: " + data + "\n状态: " + status);
-  });
+  //});
   });
 
   $("#dosomebtn").click(function(){
