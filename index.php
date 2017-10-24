@@ -154,7 +154,7 @@ $(document).ready(function(){
   isStart = 2;
   lastRecord = {};
   count = 0;
-  url = "/1.php";
+  url = window.location.pathname+"1.php";
   getLastRecord();
   timeUpdate();
 
