@@ -26,7 +26,7 @@ switch ($action) {
 	$lastRecord = $db->getLastRecord();
 	if ($lastRecord['type'] == 1) {
 	$dvalue = strtotime(date("c"))-strtotime($lastRecord['date']);
-	$db->setTotalCount($db->getTotalCount()+$dvalue);
+	$db->setTotalCount($db->getTotalCount()+$dvalue*3);
 	$db->endRecord(date("c"));
 	}
 	break;

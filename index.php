@@ -91,7 +91,7 @@ function timeUpdate(){
     $("#titleTime").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
     if (isStart == 1) {
-    count = count + 0.9512*3;
+    count = count + 0.9512*3*3;
     $("#titleMoney").text(count.toFixed(2));
   }else if (isStart == 0){
     count = count - 0.9512*3; 
