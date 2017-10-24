@@ -151,6 +151,7 @@ function getLastRecord(){
   }else{
   count = lastRecord.tempCount* 9.512;
   isStart = 0;
+  $("#subTitle").html("<br /><br />");
   } 
   });
 }
