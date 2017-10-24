@@ -92,13 +92,16 @@ function timeUpdate(){
     if (isStart) {
     count = count + 0.9512*3;
     $("#titleMoney").text(count.toFixed(2));
+  }else{
+    count = count - 0.9512*3; 
+    $("#titleMoney").text(count.toFixed(2));
   }
   },300);
 
 }
 function getTotalCount(){
   
-  $.get("http://localhost:8000/1.php",{action:"getTotalCount"},function(data,status){
+  $.get(url,{action:"getTotalCount"},function(data,status){
     //alert(data);
     count = Number(data);
     $("#titleMoney").text(count.toFixed(2));
@@ -106,16 +109,18 @@ function getTotalCount(){
   //return count;
 }
 function startRecord(){
-   $.get("http://localhost:8000/1.php",{action:"startRecord"},function(data,status){
+  getLastRecord();
+   $.get(url,{action:"startRecord"},function(data,status){
     //alert(data);
     //count = Number(data);
     $("#titleMoney").text(count.toFixed(2));
+    isStart = 1;
   });
-   isStart = 1;
+   
 }
 function endRecord(){
   isStart = 0;
-  $.get("http://localhost:8000/1.php",{action:"endRecord"},function(data,status){
+  $.get(url,{action:"endRecord"},function(data,status){
     //alert(data);
     //count = Number(data);
     //$("#titleMoney").text(count.toFixed(2));
@@ -127,13 +132,20 @@ function endRecord(){
 function getLastRecord(){
   //alert("getLastRecord");
   //var record;
-  $.get("http://localhost:8000/1.php",{action:"getLastRecord"},function(data,status){
+  $.get(url,{action:"getLastRecord"},function(data,status){
+
   lastRecord = jQuery.parseJSON(data);
+  if (lastRecord.type == "2") {
+    
+      $("#titleMoney").text(lastRecord.count.toFixed(2));
+      return 0;
+    }
   if (lastRecord.type == "1") {
     count = lastRecord.tempCount;
     isStart = 1;
   }else{
-  count = lastRecord.count;
+  count = lastRecord.tempCount;
+  isStart = 0;
   }
   timeUpdate(count);  
   });
@@ -142,13 +154,14 @@ $(document).ready(function(){
   isStart = 0;
   lastRecord = {};
   count = 0;
+  url = "http://localhost:8000/1.php";
   getLastRecord();
   
 
   $("#freebtn").click(function(){
     endRecord();
-    $.get("http://localhost:8000/1.php",{action:"getTotalCount"},function(data,status){
-    alert("数据: " + data + "\n状态: " + status);
+    $.get(url,{action:"getTotalCount"},function(data,status){
+    //alert("数据: " + data + "\n状态: " + status);
   });
   });
 

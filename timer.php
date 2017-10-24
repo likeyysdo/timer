@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Shanghai") ;
 //echo date("c");
 $db = MyDB::getInstance();
 $lastRecord = $db->getLastRecord();
-	if ($lastRecord['type'] == 0) {
+	if ($lastRecord['type'] == 0||$lastRecord['type'] == 2) {
 		return ;
 	}
 $dvalue = strtotime(date("c"))-strtotime($lastRecord['date']);

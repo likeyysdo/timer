@@ -30,7 +30,7 @@
          while($arr=$stmtResult->fetchArray())
          {
             if ($result = $arr['Count']) {
-               //echo $result;
+               
                return $result;
             }
           
@@ -44,7 +44,7 @@
             if(!$stmtResult){
             echo static::$db->lastErrorMsg();
             } else {
-            echo "success";
+            //echo "success";
             }
       }
       public function startRecord($date){
@@ -54,7 +54,7 @@
             if(!$stmtResult){
             echo static::$db->lastErrorMsg();
             } else {
-            echo "success";
+            //echo "success";
             }
 
       }
@@ -65,7 +65,7 @@
             if(!$stmtResult){
             echo static::$db->lastErrorMsg();
             } else {
-            echo "success";
+            //echo "success";
             }
 
       }
@@ -112,7 +112,7 @@
    } else {
       echo "Opened database successfully\n <br />";
    }
-   echo $db1->getTotalCount();
+   echo $db1->getTotalCount(),123;
    //$db1->setTotalCount(1273.44444);
    echo $db1->getTotalCount();
    //$db1->startRecord("asda123sd");

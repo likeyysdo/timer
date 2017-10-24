@@ -13,6 +13,10 @@ switch ($action) {
 		break;
 	case 'startRecord':
 		# code...
+	$lastRecord = $db->getLastRecord();
+	if ($lastRecord['type'] == 1) {
+		break;
+	}
 	$db->startRecord(date("c"));
 		break;
 	case 'endRecord':
@@ -28,11 +32,20 @@ switch ($action) {
 	case 'getLastRecord':
 		# code...
 	$lastRecord = $db->getLastRecord();
+	if (is_null($lastRecord['num'])) {
+		$tempDate = date("c");
+		$db->startRecord($tempDate);
+		$db->endRecord($tempDate);
+		$lastRecord['type'] = 2;
+		$lastRecord['count'] = $db->getTotalCount();
+		echo json_encode($lastRecord);
+		break;
+	}
 	$lastRecord['count'] = $db->getTotalCount();
 	if ($lastRecord['type']) {
-		# code...
-		
 		$lastRecord['tempCount'] = $lastRecord['count']+strtotime(date("c"))-strtotime($lastRecord['date']);
+	}else{
+		$lastRecord['tempCount'] = $lastRecord['count']-(strtotime(date("c"))-strtotime($lastRecord['date']));
 	}
 	
 	echo json_encode($lastRecord);
@@ -90,4 +103,4 @@ $d3 = DateTime::createFromFormat(DateTime::ISO8601,date("c"));
 echo strtotime(date("c"));
 }
 //php1test();
-//echo strtotime("2017-10-22T01:42:26+08:00");
+//echo st
