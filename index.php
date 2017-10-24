@@ -35,7 +35,7 @@
     </div>
   </nav>
 -->
-  <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
+  <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;/cover_event.jpg&quot;);">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
@@ -52,6 +52,7 @@ document.write(moment().format('MMMM Do YYYY, H:mm:ss'));
       </div>
     </div>
   </div>
+  <!--
   <div class="py-5" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
     <div class="container">
       <div class="row">
@@ -78,6 +79,7 @@ document.write(moment().format('MMMM Do YYYY, H:mm:ss'));
       </div>
     </div>
   </div>
+-->
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
