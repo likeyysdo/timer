@@ -35,7 +35,7 @@
     </div>
   </nav>
 -->
-  <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;/cover_event.jpg&quot;);">
+  <div class="py-5 text-center opaque-overlay" id="div1">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
@@ -147,6 +147,7 @@ function getLastRecord(){
   if (lastRecord.type == "1") {
     count = lastRecord.tempCount* 9.512;
     isStart = 1;
+    $("#subTitle").html("Start:"+moment(lastRecord.date).format('MMMM Do YYYY, H:mm:ss')+'<br />'+"End:"+moment(lastRecord.date).add(45,'m').format('MMMM Do YYYY, H:mm:ss'));
   }else{
   count = lastRecord.tempCount* 9.512;
   isStart = 0;
@@ -154,6 +155,7 @@ function getLastRecord(){
   });
 }
 $(document).ready(function(){
+  $("#div1").css("backgroundImage",'url(' + window.location.pathname+"cover_event.jpg" + ')');
   isStart = 2;
   lastRecord = {};
   count = 0;
